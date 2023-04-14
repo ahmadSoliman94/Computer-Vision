@@ -42,3 +42,29 @@
 
 ### - Entropy filter: 
 - ### can be used to separate regions and can detect subtle variations in the local gray level distribution.
+
+---------------------------
+<br />
+
+###  - Filters work by convolution with a moving window called a kernel.
+### - Convolution is nothing but multiplication of two arrays of different sizes.
+### - The image will be of one size and the kernel with be of a different size, usually much smaller than image.
+### - The input pixel is at the centre of the kernel. 
+### -  The convolution is performed by sliding the kernel over the image, usually from top left of image.
+
+<br />
+
+- ## ___Linear filters:___  are typically used for smoothing or blurring an image, or for removing noise. Examples of linear filters include the Gaussian filter, the mean filter. These filters work by convolving the image with a kernel or mask that contains weights that are applied to each pixel in the image.
+
+- ## ___Non-linear filters:___ are used for more complex image processing tasks such as edge detection, image segmentation, and feature extraction. Unlike linear filters, non-linear filters use non-linear operations such as thresholding, morphological operations, and nonlinear transformations to manipulate the image. Examples of non-linear filters include the Sobel filter, the Canny edge detector, and the morphological filter and  the median filter. 
+
+<br />
+
+### - __A Gaussian kernel__: is a type of linear filter used in image processing to blur or smooth an image. 
+
+### - Is defiend by the following equation: 
+```scss
+G(x,y) = (1/2πσ^2) * e^(-(x^2+y^2)/2σ^2)
+```
+
+###  NLM: is a non-local means denoising algorithm. It is based on the assumption that similar patches are likely to be found in close proximity in an image.

@@ -73,9 +73,9 @@ plt.tight_layout()
 plt.show()
 
 
-Another edge filter is Canny. This is not just a single operation. 
-It does noise reduction, gradient calculation, and edge tracking among other things. 
-Canny creates a binary file, true or false pixels. 
+# Another edge filter is Canny. This is not just a single operation. 
+# It does noise reduction, gradient calculation, and edge tracking among other things. 
+# Canny creates a binary file, true or false pixels. 
 
 
 '''
