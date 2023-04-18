@@ -57,14 +57,14 @@ denoise_img_as_8byte.shape[0] means that we want to get the first dimension of t
 denoise_img_as_8byte.shape[1] means that we want to get the second dimension of the array.
 3 means that we want to have 3 layers.
 '''
-# all_segments = np.zeros((denoise_img_as_8byte.shape[0], denoise_img_as_8byte.shape[1], 3)) # de
+all_segments = np.zeros((denoise_img_as_8byte.shape[0], denoise_img_as_8byte.shape[1], 3)) # de
 
-# all_segments[segm1] = (1,0,0) # red
-# all_segments[segm2] = (0,1,0) # green
-# all_segments[segm3] = (0,0,1) # blue
-# all_segments[segm4] = (1,1,0) # yellow
-# plt.imshow(all_segments)
-# plt.show()
+all_segments[segm1] = (1,0,0) # red
+all_segments[segm2] = (0,1,0) # green
+all_segments[segm3] = (0,0,1) # blue
+all_segments[segm4] = (1,1,0) # yellow
+plt.imshow(all_segments)
+plt.show()
 
 ################################################################
 
