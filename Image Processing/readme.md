@@ -68,3 +68,34 @@ G(x,y) = (1/2πσ^2) * e^(-(x^2+y^2)/2σ^2)
 ```
 
 ###  NLM: is a non-local means denoising algorithm. It is based on the assumption that similar patches are likely to be found in close proximity in an image.
+
+<br />
+
+# Image Enhancments:
+- ### Some times images ack contrast, they appear to be washed out but they still contain information.
+- ### We can mathematically process these images and make them look good, more importantly, get them ready for segmentation.
+- ###  __Using:__
+    1. ### Histogram equalization: is an image processing technique that adjusts the contrast of an image by using its histogram. To enhance the image’s contrast, it spreads out the most frequent pixel intensity values or stretches out the intensity range of the image. By accomplishing this, histogram equalization allows the image’s areas with lower contrast to gain a higher contrast.
+
+<br />
+
+2. ### Adaptive Histogram Equalization (AHE): dividing the image into smaller regions, calculating the histogram of each region, and then applying HE to each region individually. This results in a more localized contrast enhancement, which can better preserve the details of the image.
+
+> ### __NOTE:__ adaptive histogram equalization is better than the ordinary histogram equalization if you want to improve the local contrast and enhance the edges in specific regions of the image.
+
+<br />
+
+3. ### Contrast Limited Adaptive Histogram Equalization (CLAHE): divide an image into small, overlapping tiles, and then apply the HE algorithm to each tile separately. This approach allows for better control of the contrast enhancement in different regions of the image, as the local histogram of each tile can be adjusted independently.
+
+> ###  one of the main problems with traditional HE is that it can amplify noise in regions with low contrast, which can result in unnatural-looking artifacts. To address this problem, CLAHE sets a limit on the amount of contrast enhancement that can be applied to each tile, based on the overall contrast of the image. This limit helps to prevent the amplification of noise and other artifacts, while still allowing for significant contrast enhancement in regions with low contrast.
+
+
+<br />
+
+# Thresholding:
+- ### is a widely used image preprocessing technique that is used to separate regions of an image based on their intensity values. It involves setting a threshold value, which divides the pixel values of the image into two groups: those above the threshold and those below it.
+
+### -  There are several different types of thresholding algorithms:
+1. ### Global thresholding: In this technique, a single threshold value is applied to the entire image, regardless of the local variations in intensity.
+2. ### Adaptive thresholding: This technique involves dividing the image into small regions and applying a threshold value to each region independently, based on the local intensity values.
+3. ### Otsu's thresholding: This technique involves finding the threshold value that maximizes the separation between the foreground and background regions of the image, using a statistical measure known as the "between-class variance."
