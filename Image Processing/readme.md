@@ -99,3 +99,5 @@ G(x,y) = (1/2πσ^2) * e^(-(x^2+y^2)/2σ^2)
 1. ### Global thresholding: In this technique, a single threshold value is applied to the entire image, regardless of the local variations in intensity.
 2. ### Adaptive thresholding: This technique involves dividing the image into small regions and applying a threshold value to each region independently, based on the local intensity values.
 3. ### Otsu's thresholding: This technique involves finding the threshold value that maximizes the separation between the foreground and background regions of the image, using a statistical measure known as the "between-class variance."
+
+
