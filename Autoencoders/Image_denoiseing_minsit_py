@@ -1,0 +1,143 @@
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, UpSampling2D
+from tensorflow.keras.models import Sequential
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+
+
+# ====================== Minst image denoising ======================
+
+
+def minst_image_denoising():
+
+    """ This function denoises the minst image using autoencoders """
+
+    np.random.seed(42) # Set the seed for reproducibility
+
+    # Load the dataset
+    (x_train, _), (x_test, _) = mnist.load_data()
+
+    # Normalize the data
+    x_train = x_train.astype('float32') / 255.
+    x_test = x_test.astype('float32') / 255.
+
+    # Add noise to the data
+    noise_factor = 0.5 # Define the noise factor
+    x_train_noisy = x_train + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=x_train.shape) # Add noise to the training data, loc is the mean of the normal distribution, scale is the standard deviation of the normal distribution, size is the number of elements to be drawn from the distribution
+    x_test_noisy = x_test + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=x_test.shape) # Add noise to the test data
+
+
+    # Clip the data to be between 0 and 1
+    x_train_noisy = np.clip(x_train_noisy, 0., 1.)
+    x_test_noisy = np.clip(x_test_noisy, 0., 1.)
+
+    # Reshape the data
+    x_train = np.reshape(x_train, (len(x_train), 28, 28, 1)) # Convert the array to numpy array and reshape it
+    x_test = np.reshape(x_test, (len(x_test), 28, 28, 1)) # Convert the array to numpy array and reshape it
+    x_train_noisy = np.reshape(x_train_noisy, (len(x_train_noisy), 28, 28, 1)) # Convert the array to numpy array and reshape it
+    x_test_noisy = np.reshape(x_test_noisy, (len(x_test_noisy), 28, 28, 1)) # Convert the array to numpy array and reshape it
+
+    # Despay the noisy images
+    plt.figure(figsize=(20, 2)) # Set the figure size
+    for i in range(1, 10): # Loop over the first 10 images
+        ax = plt.subplot(1, 10, i) # Create a subplot
+        plt.imshow(x_test_noisy[i].reshape(28, 28)) # Plot the image
+    plt.show() # Show the plot
+
+    # Define the model architecture
+    model = Sequential()
+    model.add(Conv2D(32, (3, 3), activation='relu', padding='same', input_shape=(28, 28, 1)))
+    model.add(MaxPooling2D((2, 2), padding='same'))
+    model.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
+    model.add(MaxPooling2D((2, 2), padding='same'))
+    model.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
+
+    model.add(MaxPooling2D((2, 2), padding='same'))
+
+    # Up sampling
+    model.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
+    model.add(UpSampling2D((2, 2)))
+    model.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
+    model.add(UpSampling2D((2, 2)))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(UpSampling2D((2, 2)))
+    model.add(Conv2D(1, (3, 3), activation='sigmoid', padding='same'))
+
+    # Compile the model
+    model.compile(optimizer='adam', loss='binary_crossentropy')
+
+    # print the model summary
+    print(model.summary())
+
+    # Train the model
+    history = model.fit(x_train_noisy, x_train, epochs=10, batch_size=256, shuffle=True, validation_data=(x_test_noisy, x_test))
+
+    # evaluate the model
+    print(model.evaluate(x_test_noisy, x_test))
+
+
+
+
+    # plot the losses 
+    fig, ax = plt.subplots(1, 2, figsize=(10, 4)) # Create a figure and a set of subplots
+    ax = ax.ravel() # Convert the ax to a numpy array
+    for i, met in enumerate(['loss', 'val_loss']): # Loop over the loss and val_loss
+        ax[i].plot(history.history[met]) # Plot the loss
+        ax[i].set_title('Model {}'.format(met)) # Set the title
+        ax[i].set_xlabel('epochs') # Set the x label
+        ax[i].set_ylabel(met) # Set the y label
+    plt.show() # Show the plot
+
+    # plot the accuracy
+    fig, ax = plt.subplots(1, 2, figsize=(10, 4)) # Create a figure and a set of subplots
+    ax = ax.ravel() # Convert the ax to a numpy array
+    for i, met in enumerate(['accuracy', 'val_accuracy']): # Loop over the accuracy and val_accuracy
+        ax[i].plot(history.history[met]) # Plot the accuracy
+        ax[i].set_title('Model {}'.format(met)) # Set the title
+        ax[i].set_xlabel('epochs') # Set the x label
+        ax[i].set_ylabel(met) # Set the y label
+    plt.show() # Show the plot
+
+
+
+    # Predict the test data
+    x_test_denoised = model.predict(x_test_noisy)
+
+
+    # Display the denoised images and the original images
+    plt.figure(figsize=(20, 4))
+    for i in range(10):
+        # Original Image
+        ax = plt.subplot(3, 10, i+1)
+        plt.imshow(x_test[i].reshape(28, 28))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
+        # Noisy Image
+        ax = plt.subplot(3, 10, i+1+10)
+        plt.imshow(x_test_noisy[i].reshape(28, 28))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+
+        # Denoised Image
+        ax = plt.subplot(3, 10, i+1+20)
+        plt.imshow(x_test_denoised[i].reshape(28, 28))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+    plt.show()
+
+
+
+
+    
+
+    
+
+
+
+    
