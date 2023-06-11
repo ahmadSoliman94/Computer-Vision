@@ -443,6 +443,7 @@
     <img src="images/44.png" alt="Image 1" style="width: 50%;">
     <img src="images/45.png" alt="Image 2" style="width: 50%;">
 </div>
+<<<<<<< HEAD
 
 
 <br />
@@ -531,3 +532,5 @@
 ![51](images/51.png)
 
 > ### __NOTE:__ b = 3 means that there are 3 anchor boxes at each scale. and 255 the depth of the output tensor. 255 = 3 * (4 + 1 + 80) where 4 is the number of bounding box attributes, 1 is the object confidence and 80 is the number of classes.
+=======
+>>>>>>> 78408d9796666a20dfaa9cd1533cdaa73cc9d136
