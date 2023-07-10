@@ -281,6 +281,19 @@
 
 ![18](images/18.png)
 
+
+RCNN vs fast RCNN vs faster RCNN: 
+
+R-CNN: The original R-CNN model uses Selective Search to extract regions of interest (ROIs) from an input image, which may represent the boundaries of objects in the image. Each ROI is then fed through a neural network to produce output features, which are then classified using support-vector machine classifiers. However, R-CNN is slow in both training and testing due to the need to process around 2000 regions per image.
+Fast R-CNN: This model improves upon R-CNN by introducing a more efficient method for classifying object proposals using deep convolutional networks. Fast R-CNN trains the VGG16 network 9x faster than R-CNN, is 213x faster at test-time, and achieves a higher mean average precision (mAP) on PASCAL VOC 2012. The main innovation in Fast R-CNN is the use of a technique called Region of Interest (ROI) pooling, which allows the network to process the entire image at once, rather than processing each region proposal separately. This results in faster training and detection times compared to R-CNN.
+Faster R-CNN: This model further improves upon Fast R-CNN by introducing a Region Proposal Network (RPN) to generate ROIs, which is much faster than the Selective Search algorithm used in R-CNN and Fast R-CNN. The RPN is a fully convolutional network that simultaneously predicts object bounds and objectness scores at each position. Faster R-CNN is faster in terms of detection time compared to both R-CNN and Fast R-CNN and has better accuracy.
+In summary, the main differences between the three models are as follows:
+R-CNN uses Selective Search for generating ROIs and processes each region proposal separately, resulting in slow training and testing times.
+Fast R-CNN introduces ROI pooling for more efficient classification of object proposals and processes the entire image at once, leading to faster training and detection times compared to R-CNN.
+Faster R-CNN replaces Selective Search with a Region Proposal Network (RPN) for generating ROIs, further speeding up the detection process and improving accuracy compared to Fast R-CNN.
+
+
+
 -----------------------------------------
 
 ## YOLO (You Only Look Once)
