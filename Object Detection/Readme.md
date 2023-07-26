@@ -143,8 +143,8 @@
 
 
 <div style="display: flex; justify-content: center;">
-    <img src="images/6.webp" alt="Image 1" style="width: 45%;">
-    <img src="images/17.png" alt="Image 2" style="width: 45%;">
+    <img src="images/6.webp" alt="Image 1" style="width: 50%;">
+    <img src="images/17.png" alt="Image 2" style="width: 50%;">
 </div>
 
 <br />
@@ -545,3 +545,8 @@ Faster R-CNN replaces Selective Search with a Region Proposal Network (RPN) for 
 ![51](images/51.png)
 
 > ### __NOTE:__ b = 3 means that there are 3 anchor boxes at each scale. and 255 the depth of the output tensor. 255 = 3 * (4 + 1 + 80) where 4 is the number of bounding box attributes, 1 is the object confidence and 80 is the number of classes.
+
+------ 
+
+> __NOTE__ : 
+> to Detect very small objects we can using SAHI with another object detection algorithms like YOLO. for more details check this [check here](https://github.com/obss/sahi)
